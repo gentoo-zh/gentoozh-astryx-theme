@@ -1,0 +1,41 @@
+{
+  "name": "@gentoozh/astryx-theme",
+  "version": "0.1.0",
+  "description": "Shared Astryx theme for gentoozh.org and Zpaste.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {"type": "git", "url": "git+https://github.com/gentoo-zh/gentoozh-astryx-theme.git"},
+  "packageManager": "pnpm@11.15.1",
+  "engines": {"node": ">=22.12.0"},
+  "sideEffects": ["**/*.css"],
+  "files": ["dist", "src"],
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./scale": {
+      "source": "./src/scale.ts",
+      "types": "./dist/scale.d.ts",
+      "default": "./dist/scale.js"
+    },
+    "./gentoo.css": {
+      "types": "./dist/gentoo.css.d.ts",
+      "default": "./dist/gentoo.css"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p . && astryx theme build src/theme.ts --out dist/gentoo.css && rm -f dist/gentoo.js dist/gentoo.d.ts",
+    "check": "tsc -p . --noEmit && pnpm build && git diff --exit-code -- dist"
+  },
+  "peerDependencies": {
+    "@astryxdesign/core": "0.7.x"
+  },
+  "devDependencies": {
+    "@astryxdesign/cli": "0.7.0",
+    "@astryxdesign/core": "0.7.0",
+    "typescript": "6.0.3"
+  }
+}
