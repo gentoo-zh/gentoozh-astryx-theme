@@ -10,4 +10,4 @@ export declare const brandTokens: Record<string, TokenValue>;
  * Figtree and sets `--font-figtree`; Google Fonts is blocked in mainland China, so system CJK fonts follow.
  */
 export declare const FONT_FALLBACKS = "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"PingFang SC\", \"PingFang TC\", \"Noto Sans CJK SC\", \"Noto Sans CJK TC\", \"Microsoft YaHei\", \"Microsoft JhengHei\", Helvetica, Arial, sans-serif";
-export declare const gentooSyntaxTheme: any;
+export declare const gentooSyntaxTheme: import("@astryxdesign/core/theme").SyntaxThemeDefinition;

@@ -1,1 +1,1 @@
-export declare const gentooTheme: any;
+export declare const gentooTheme: import("@astryxdesign/core/theme").ResolvedDefinedTheme;

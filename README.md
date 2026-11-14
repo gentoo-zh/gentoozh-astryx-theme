@@ -1,12 +1,10 @@
 # @gentoozh/astryx-theme
 
-The shared [Astryx](https://astryx.design) theme of gentoozh.org and Zpaste. It holds the colour palette, light and dark modes, Figtree and CJK font stack, radii, syntax colours, a few component overrides and the sizing roles, so both sites look the same. It targets `@astryxdesign/core` 0.7.x.
-
-The package ships the theme object (to extend) and the compiled stylesheet `dist/gentoo.css` (to import as is).
+The shared [Astryx](https://astryx.design) theme of gentoozh.org and Zpaste, for `@astryxdesign/core` 0.7.x. It ships the theme object (to extend) and the compiled stylesheet `dist/gentoo.css` (to import as-is).
 
 ## Install
 
-Pin a release tag. Pnpm resolves a tag to a commit and records it in the lockfile:
+Pin a release tag. pnpm resolves a tag to a commit and records it in the lockfile:
 
 ```sh
 pnpm add github:gentoo-zh/gentoozh-astryx-theme#v0.1.0
@@ -18,7 +16,9 @@ Your project must also depend on `@astryxdesign/core` 0.7.x, React 19 and, for t
 
 ## Use
 
-The stylesheet scopes every rule to `[data-astryx-theme="gentoo"]`, so set that attribute on `<html>` (or any ancestor of the Astryx components). The theme follows `prefers-color-scheme`; `data-theme="light"` or `data-theme="dark"` on `<html>` overrides it.
+The stylesheet scopes every token, component override and adaptation to `[data-astryx-theme="gentoo"]`, down to the next `data-astryx-theme` element. Set that attribute on `<html>` or on any ancestor of the Astryx components.
+
+Three rules are global, because they must reach `<html>`: `:root { color-scheme: light dark }`, `html[data-theme="light"] { color-scheme: light }` and `html[data-theme="dark"] { color-scheme: dark }`. They apply wherever the stylesheet is loaded. Without `data-theme` on `<html>` the page follows `prefers-color-scheme`; `data-theme="light"` or `"dark"` overrides it. A host app that sets its own `data-theme` on `<html>` therefore switches the colour scheme too.
 
 The theme names the Latin face `var(--font-figtree,Figtree)`. Load a face called `Figtree` (for example with `@fontsource/figtree`) or set `--font-figtree` to your own font stack; system CJK fonts follow it.
 
@@ -77,7 +77,13 @@ The sizing roles (`SPACE`, `BUTTON`, `ICON`, `AVATAR`, `CHIP`, `TAB`, `CARD`, `C
 
 Shared: the colour tokens, the syntax theme, typography, radii, the display weights, the component overrides that every page needs (buttons, segmented control, switch label, top navigation, markdown), the responsive adaptations, and the sizing roles.
 
-Not shared: tokens and styles used by one page or one app, such as the homepage palette and terminal colours, images, layout measures and StyleX markers. They stay in the consumer and join through `extends`.
+Left out, because only gentoozh.org uses it. These stay in the site and join through `extends`:
+
+- Tokens `--color-home-hero-glow`, `--color-home-card`, `--color-home-icon-tint`, `--home-display-size` and `--home-terminal-background`, `-foreground`, `-muted`, `-border` and `-dot`.
+- The `text` overrides `type:metric` and `type:service-metric`, with the `CustomTextTypes` augmentation that declares them.
+- The `table-scroll-wrapper` override.
+- Sizing roles `GRID`, `STACK`, `TEMPLATE`, `CHANNEL_COLUMNS` and `COSTS`, `ICON.channelPx`, and `AVATAR.profile` and `AVATAR.profileDesktop`.
+- Images, layout measures and StyleX markers.
 
 ## Release
 
